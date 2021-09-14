@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title>Open Poll</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.15/tailwind.css" integrity="sha512-DzI/qIN7eBl6rUzNOoJJs3tYzNDTafulzmkzL7BgG/2iYOw6O2/kBNA0r8XVEHaJ9sSdzc00tMkanzQq7EFFMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+
+    <body>
+        <nav>
+            <div class="pt-2 pl-4 pb-2 ">
+                <p class="text-3xl font-bold"> <a href="/polls">OPEN POLL</a></p>
+            </div>
+        </nav>
+        <div class="text-left pl-10 bg-white rounded-lg" style=" margin-left: 25%; margin-right: 25%">
+            <div class="p-10 m-10">
+                <p class="text-4xl">{{ question.question_text }}</p>
+
+                <ul class="mt-4">
+                {% for choice in question.choice_set.all %}
+                    <li class="text-xl">{{ choice.choice_text }} | {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+                {% endfor %}
+                </ul>
+
+                <button onclick="document.location.href = '{% url 'polls:detail' question.id %}'" class="inline-flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-5 ">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    <span>Vote again</span>
+                </button>
+            </div>
+        </div>
+
+
+    </body>
+</html>

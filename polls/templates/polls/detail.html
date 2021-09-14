@@ -1,0 +1,33 @@
+<html>
+
+    <head>
+        <title>OpenPoll</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.15/tailwind.css" integrity="sha512-DzI/qIN7eBl6rUzNOoJJs3tYzNDTafulzmkzL7BgG/2iYOw6O2/kBNA0r8XVEHaJ9sSdzc00tMkanzQq7EFFMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+
+    <body>
+        <nav>
+            <div class="pt-2 pl-4 pb-2 ">
+                <p class="text-3xl font-bold"> <a href="/polls">OPEN POLL</a></p>
+            </div>
+        </nav>
+
+    <div class="text-left pl-10 bg-white rounded-lg" style=" margin-left: 25%; margin-right: 25%">
+        <form action="{% url 'polls:vote' question.id %}" class="p-10 m-10" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <a class="text-4xl">{{ question.question_text }}</a>
+            <br>
+            <div class="text-left mt-4">
+                {% if error_message %}<p class="text-red-500"><strong>{{ error_message }}</strong></p>{% endif %}
+                {% for choice in question.choice_set.all %}
+                    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                    <label class="text-2xl" for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+                {% endfor %}
+            </div>
+        </fieldset>
+            <button type="submit" value="Vote" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-5 ">Vote</button>
+        </form>
+    </div>
+    </body>
+</html>
