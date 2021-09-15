@@ -10,9 +10,15 @@ class IndexView(generic.TemplateView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
 
-class DetailView(generic.DetailView):
-    model = Question
-    template_name = 'polls/detail.html'
+
+def detail(request, id):
+    try:
+        question = Question.objects.get(id=id)
+    except (KeyError, Question.DoesNotExist):
+        # Display an Poll doesn't exist page
+        return render(request, 'polls/poll404.html')
+    else:
+        return render(request, 'polls/detail.html', {'question': question})
 
 
 class ResultsView(generic.DetailView):
