@@ -3,6 +3,12 @@
     <head>
         <title>OpenPoll</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.15/tailwind.css" integrity="sha512-DzI/qIN7eBl6rUzNOoJJs3tYzNDTafulzmkzL7BgG/2iYOw6O2/kBNA0r8XVEHaJ9sSdzc00tMkanzQq7EFFMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <style>
+            body {
+                background-color: #DFDBE5;
+            }
+        </style>
     </head>
 
     <body>
@@ -12,7 +18,7 @@
             </div>
         </nav>
 
-    <div class="text-left pl-10 bg-white rounded-lg" style=" margin-left: 25%; margin-right: 25%">
+    <div class="text-left pl-10 rounded-lg" style=" margin-left: 25%; margin-right: 25%">
         <form action="{% url 'polls:vote' question.id %}" class="p-10 m-10" method="post">
         {% csrf_token %}
         <fieldset>
