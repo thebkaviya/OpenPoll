@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OpenPoll | Poll doesn't exist</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.15/tailwind.css" integrity="sha512-DzI/qIN7eBl6rUzNOoJJs3tYzNDTafulzmkzL7BgG/2iYOw6O2/kBNA0r8XVEHaJ9sSdzc00tMkanzQq7EFFMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            background-color: #DFDBE5;
+        }
+    </style>
+</head>
+<body>
+    <div style="margin-left: 25%; margin-right: 25%; margin-top: 40vh; margin-bottom: 25vh" class="text-center">
+        <div class="pt-2 pb-2 ">
+            <p class="text-6xl font-bold">HMMM.</p>
+            <p class="text-4xl font-bold"> we can't find any poll with that ID</p>
+            <p class="text-sml font-light text-grey-500 mt-2 ">404_Poll_Not_Found</p>
+            <button onclick="document.location.href = '{% url 'polls:index' %}'" class="inline-flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-5 ">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                <span>Return</span>
+            </button>
+        </div>
+    </div>
+</body>
+</html>
