@@ -7,6 +7,8 @@ class Question(models.Model):
     pub_date = models.DateTimeField('date published')
     description = models.TextField(max_length=1000, default="")
 
+    voting_closed = models.BooleanField("voting closed", default=False)
+
     def __str__(self):
         return self.question_text
 
