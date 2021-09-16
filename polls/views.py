@@ -16,8 +16,20 @@ def detail(request, _id):
         question = Question.objects.get(id=_id)
     except (KeyError, Question.DoesNotExist):
         # Display an Poll doesn't exist page
-        return render(request, 'polls/poll404.html')
+        return render(request, 'polls/poll_error.html', {'error': {
+            'head': "HMM.",
+            'body': "we can't find any poll with that ID",
+            'code': "404_Poll_Not_Found",
+            'title': "Poll Not Found"
+        }})
     else:
+        if question.voting_closed:
+            return render(request, 'polls/poll_error.html', {'error': {
+                'head': "WELL THAT SUCKS.",
+                'body': "the poll you're looking for is closed",
+                'code': "Poll_Closed",
+                'title': "Poll Closed"
+            }})
         return render(request, 'polls/detail.html', {'question': question})
 
 
