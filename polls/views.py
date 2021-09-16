@@ -11,9 +11,9 @@ class IndexView(generic.TemplateView):
     context_object_name = 'latest_question_list'
 
 
-def detail(request, id):
+def detail(request, _id):
     try:
-        question = Question.objects.get(id=id)
+        question = Question.objects.get(id=_id)
     except (KeyError, Question.DoesNotExist):
         # Display an Poll doesn't exist page
         return render(request, 'polls/poll404.html')
