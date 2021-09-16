@@ -23,6 +23,7 @@
         {% csrf_token %}
         <fieldset>
             <p class="text-3xl font-bold">{{ question.question_text }}</p>
+            <p class="text-sm">Created At {{ question.pub_date.astimezone }}</p>
             <p class="mt-2">
                 {{ question.description }}
             </p>
