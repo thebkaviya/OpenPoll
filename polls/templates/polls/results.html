@@ -18,11 +18,11 @@
         </nav>
         <div class="text-left pl-10 rounded-lg" style=" margin-left: 25%; margin-right: 25%">
             <div class="p-10 m-10">
-                <p class="text-4xl">{{ question.question_text }}</p>
+                <p class="text-3xl font-bold">{{ question.question_text }}</p>
 
                 <ul class="mt-4">
                 {% for choice in question.choice_set.all %}
-                    <li class="text-xl">{{ choice.choice_text }} | {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+                    <li class="">{{ choice.choice_text }} | {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
                 {% endfor %}
                 </ul>
 
