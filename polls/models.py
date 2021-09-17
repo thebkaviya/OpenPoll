@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 
 
@@ -10,6 +12,9 @@ class Question(models.Model):
     voting_closed = models.BooleanField("voting closed", default=False)
     closed_date = models.DateTimeField('close date', default=None, null=True)
     enable_closed_date = models.BooleanField("enable close date", default=False)
+
+    def is_expired(self):
+        return (datetime.now().timestamp() - self.closed_date.timestamp()) > 0
 
     def __str__(self):
         return self.question_text
