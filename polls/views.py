@@ -1,6 +1,6 @@
 import datetime
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
@@ -49,6 +49,8 @@ class ResultsView(generic.DetailView):
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
+    if question.voting_closed or question.is_expired():
+        return HttpResponseNotFound()
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
