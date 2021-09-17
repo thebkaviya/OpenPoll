@@ -14,7 +14,10 @@ class Question(models.Model):
     enable_closed_date = models.BooleanField("enable close date", default=False)
 
     def is_expired(self):
-        return (datetime.now().timestamp() - self.closed_date.timestamp()) > 0
+        return datetime.now().timestamp() > self.closed_date.timestamp()
+
+    def is_published(self):
+        return datetime.now().timestamp() > self.pub_date.timestamp()
 
     def __str__(self):
         return self.question_text
