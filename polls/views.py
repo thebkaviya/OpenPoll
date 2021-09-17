@@ -32,7 +32,7 @@ def detail(request, _id):
                 'code': "Poll_Closed",
                 'title': "Poll Closed"
             }})
-        elif question.enable_closed_date and (datetime.datetime.now().timestamp() - question.closed_date.timestamp()) > 0:
+        elif question.enable_closed_date and question.is_expired():
             return render(request, 'polls/poll_error.html', {'error': {
                 'head': "OOPS.",
                 'body': "the poll you're looking for has expired",
