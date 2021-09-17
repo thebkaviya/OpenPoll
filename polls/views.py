@@ -1,3 +1,5 @@
+import datetime
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -29,6 +31,13 @@ def detail(request, _id):
                 'body': "the poll you're looking for is closed",
                 'code': "Poll_Closed",
                 'title': "Poll Closed"
+            }})
+        elif question.enable_closed_date and (datetime.datetime.now().timestamp() - question.closed_date.timestamp()) > 0:
+            return render(request, 'polls/poll_error.html', {'error': {
+                'head': "OOPS.",
+                'body': "the poll you're looking for has expired",
+                'code': "Poll_Expired",
+                'title': "Poll Expired"
             }})
         return render(request, 'polls/detail.html', {'question': question})
 
