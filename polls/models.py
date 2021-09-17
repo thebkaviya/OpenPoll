@@ -8,6 +8,7 @@ class Question(models.Model):
     description = models.TextField(max_length=1000, default="")
 
     voting_closed = models.BooleanField("voting closed", default=False)
+    closed_date = models.DateTimeField('close date', default=None)
 
     def __str__(self):
         return self.question_text
