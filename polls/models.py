@@ -9,6 +9,7 @@ class Question(models.Model):
 
     voting_closed = models.BooleanField("voting closed", default=False)
     closed_date = models.DateTimeField('close date', default=None, null=True)
+    enable_closed_date = models.BooleanField("enable close date", default=False)
 
     def __str__(self):
         return self.question_text
