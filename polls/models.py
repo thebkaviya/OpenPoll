@@ -1,7 +1,5 @@
-from datetime import datetime
-
 from django.db import models
-
+from django.utils import timezone
 
 class Question(models.Model):
     id = models.CharField("id", max_length=10, primary_key=True)
@@ -14,10 +12,10 @@ class Question(models.Model):
     enable_closed_date = models.BooleanField("enable close date", default=False)
 
     def is_expired(self):
-        return datetime.now().timestamp() > self.closed_date.timestamp()
+        return timezone.now() > self.closed_date
 
     def is_published(self):
-        return datetime.now().timestamp() > self.pub_date.timestamp()
+        return timezone.now() > self.pub_date
 
     def __str__(self):
         return self.question_text

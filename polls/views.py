@@ -39,6 +39,14 @@ def detail(request, _id):
                 'code': "Poll_Expired",
                 'title': "Poll Expired"
             }})
+        elif not question.is_published():
+            return render(request, 'polls/poll_error.html', {'error': {
+                'head': "OHNO.",
+                'body': "the poll you're looking is still not published and will be available on " +
+                        question.pub_date.strftime("%b %d %Y %H:%M:%S %z"),
+                'code': "Poll_Not_Published",
+                'title': "Poll Not Published"
+            }})
         return render(request, 'polls/detail.html', {'question': question})
 
 
@@ -49,7 +57,7 @@ class ResultsView(generic.DetailView):
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    if question.voting_closed or question.is_expired():
+    if question.voting_closed or (question.is_expired() and question.enable_closed_date):
         return HttpResponseNotFound()
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
